@@ -9,3 +9,7 @@
 - url: /swagger
   static_dir: public/swagger
 ```
+4. Generar archivo swagger.json
+```bash
+./vendor/bin/openapi --format json --output public/swagger.json src config vendor/agencycoda
+```
