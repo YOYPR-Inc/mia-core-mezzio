@@ -11,5 +11,6 @@
 ```
 4. Generar archivo swagger.json
 ```bash
-./vendor/bin/openapi --format json --output public/swagger.json src config vendor/agencycoda
+./vendor/bin/openapi --format json --output public/swagger/swagger.json src config vendor/agencycoda
 ```
+5. Reemplazar URL del archivo en el swagger/index.html
