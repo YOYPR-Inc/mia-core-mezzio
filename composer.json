@@ -29,5 +29,19 @@
             "Mia\\Core\\Config\\": "src/Config/"
         }
     },
-    "repositories": []
+    "repositories": [],
+    "scripts": {
+        "post-update-cmd": [
+            "php -r \"copy('vendor/agencycoda/mia-core-mezzio/public/swagger', 'public/swagger-ui');\""
+        ],
+        "post-package-install": [
+            "php -r \"copy('vendor/agencycoda/mia-core-mezzio/public/swagger', 'public/swagger-ui');\""
+        ],
+        "post-install-cmd": [
+            "php -r \"copy('vendor/agencycoda/mia-core-mezzio/public/swagger', 'public/swagger-ui');\""
+        ],
+        "post-create-project-cmd": [
+            "php -r \"copy('vendor/agencycoda/mia-core-mezzio/public/swagger', 'public/swagger-ui');\""
+        ]
+    }
 }
