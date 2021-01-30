@@ -1,7 +1,7 @@
 {
     "name": "agencycoda/mia-core-mezzio",
     "description": "The library for Mezzio",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "minimum-stability": "stable",
     "license": "MIT",
     "authors": [{
@@ -29,19 +29,5 @@
             "Mia\\Core\\Config\\": "src/Config/"
         }
     },
-    "repositories": [],
-    "scripts": {
-        "post-update-cmd": [
-            "php -r \"copy('vendor/agencycoda/mia-core-mezzio/public/swagger', 'public/swagger-ui');\""
-        ],
-        "post-package-install": [
-            "php -r \"copy('vendor/agencycoda/mia-core-mezzio/public/swagger', 'public/swagger-ui');\""
-        ],
-        "post-install-cmd": [
-            "php -r \"copy('vendor/agencycoda/mia-core-mezzio/public/swagger', 'public/swagger-ui');\""
-        ],
-        "post-create-project-cmd": [
-            "php -r \"copy('vendor/agencycoda/mia-core-mezzio/public/swagger', 'public/swagger-ui');\""
-        ]
-    }
+    "repositories": []
 }
