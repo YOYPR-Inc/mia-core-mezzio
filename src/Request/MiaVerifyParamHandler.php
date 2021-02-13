@@ -43,6 +43,6 @@ class MiaVerifyParamHandler implements \Psr\Http\Server\MiddlewareInterface
         if(array_key_exists($key, $querys)){
             return $querys[$key];
         }
-        return $default;
+        return $request->getAttribute($key, $default);
     }
 }
