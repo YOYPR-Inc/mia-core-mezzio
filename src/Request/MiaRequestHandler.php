@@ -33,7 +33,7 @@ abstract class MiaRequestHandler implements \Psr\Http\Server\RequestHandlerInter
         if(array_key_exists($key, $querys)){
             return $querys[$key];
         }
-        return $default;
+        return $request->getAttribute($key, $default);
     }
     
     /**
