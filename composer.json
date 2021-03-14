@@ -17,7 +17,8 @@
         "google/cloud-error-reporting": "^0.18.2",
         "google/cloud-logging": "^1.21",
         "google/cloud-storage": "^1.23",
-        "zircote/swagger-php": "^3.1"
+        "zircote/swagger-php": "^3.1",
+        "google/cloud-tasks": "^1.9"
     },
     "autoload": {
         "psr-4": {
