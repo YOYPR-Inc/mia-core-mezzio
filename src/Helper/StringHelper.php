@@ -16,4 +16,16 @@ class StringHelper
         $first_name = trim( preg_replace('#'.preg_quote($last_name,'#').'#', '', $name ) );
         return array($first_name, $last_name);
     }
+    /**
+     * Matias Camiletti -> M. Camiletti
+     */
+    public static function abbreviateFullName($fullname)
+    {
+        $split = self::splitName($fullname);
+        if($split[1] == ''){
+            return $split[0];
+        }
+
+        return ucfirst($split[0][0]) . '. ' . $split[1];
+    }
 }
