@@ -21,7 +21,7 @@ class MiaTaskHandler extends MiaRequestHandler
         // Get task Name
         $taskName = $this->getParam($request, 'mia_task_name', '');
         // Create task
-        $task = new $taskName();
+        $task = GoogleTasksHelper::getInstance()->container->get($taskName);
         // Execute task
         $task->process($this->getAllParam($request));
         // True response
