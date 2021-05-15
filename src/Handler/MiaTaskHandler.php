@@ -11,7 +11,7 @@ class MiaTaskHandler extends MiaRequestHandler
     public function handle(\Psr\Http\Message\ServerRequestInterface $request): \Psr\Http\Message\ResponseInterface
     {
         // Get Secret Key
-        $secretKey = $this->getParam($request, 'secret_ket', '');
+        $secretKey = $this->getParam($request, 'secret_key', '');
         // Init Service
         $service = GoogleTasksHelper::getInstance();
         // Verify if Valid Secret Key

@@ -54,7 +54,7 @@ class GoogleTasksHelper
         // POST is the default HTTP method, but any HTTP method can be used.
         $httpRequest->setHttpMethod(HttpMethod::POST);
         // Add Secret Key
-        $params['secret_ket'] = $this->secretKey;
+        $params['secret_key'] = $this->secretKey;
         // Setting a body value is only compatible with HTTP POST and PUT requests.
         $httpRequest->setBody(json_encode($params));
 
