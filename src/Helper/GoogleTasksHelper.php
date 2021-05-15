@@ -26,6 +26,10 @@ class GoogleTasksHelper
      * @var CloudTasksClient
      */
     protected $client;
+    /**
+     * @var \Psr\Container\ContainerInterface
+     */
+    public $container;
 
     private function __construct($config)
     {
@@ -78,13 +82,14 @@ class GoogleTasksHelper
 
     public static function executeTask($taskClassName, $params)
     {
-        $task = new $taskClassName();
+        $task = self::getInstance()->container->get($taskClassName);
         $task->run($taskClassName, $params);
     }
 
     public static function init(\Psr\Container\ContainerInterface $container)
     {
         self::$instance = new GoogleTasksHelper($container->get('config')['google_tasks']);
+        self::$instance->container = $container;
     }
 
     public static function getInstance(): GoogleTasksHelper
