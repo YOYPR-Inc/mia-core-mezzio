@@ -60,6 +60,17 @@ class GoogleTasksHelper
         // Send request and print the task name.
         return $this->client->createTask($queueName, $task);
     }
+    /**
+     * Verify if secret key is valid
+     */
+    public function isValidSecretKey($key) : bool
+    {
+        if($this->secretKey == $key){
+            return true;
+        }
+
+        return false;
+    }
 
     public static function init(\Psr\Container\ContainerInterface $container)
     {
