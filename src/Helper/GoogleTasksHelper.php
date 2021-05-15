@@ -12,7 +12,7 @@ use Google\Cloud\Tasks\V2\Task;
  *
  * @author matiascamiletti
  */
-class GoolgeTasksHelper 
+class GoogleTasksHelper 
 {
     /**
      * 
@@ -21,29 +21,23 @@ class GoolgeTasksHelper
     
     protected $projectId;
     protected $locationId;
-    protected $queueId;
     protected $secretKey;
     /**
      * @var CloudTasksClient
      */
     protected $client;
-    /**
-     * @var string
-     */
-    protected $queueName = '';
 
     private function __construct($config)
     {
         $this->projectId = $config['project_id'];
         $this->locationId = $config['location_id'];
-        $this->queueId = $config['queue_id'];
+        //$this->queueId = $config['queue_id'];
         $this->secretKey = $config['secret_key'];
 
         $this->client = new CloudTasksClient();
-        $this->queueName = $this->client->queueName($this->projectId, $this->locationId, $this->queueId);
     }
 
-    public function addTask($path, $params)
+    public function addTask($queueId, $path, $params)
     {
         // Create an App Engine Http Request Object.
         $httpRequest = new AppEngineHttpRequest();
@@ -60,17 +54,31 @@ class GoolgeTasksHelper
         $task = new Task();
         $task->setAppEngineHttpRequest($httpRequest);
 
+        // Create Queue
+        $queueName = $this->client->queueName($this->projectId, $this->locationId, $queueId);
+
         // Send request and print the task name.
-        return $this->client->createTask($this->queueName, $task);
+        return $this->client->createTask($queueName, $task);
     }
 
     public static function init(\Psr\Container\ContainerInterface $container)
     {
-        self::$instance = new GoolgeTasksHelper($container->get('config')['google_tasks']);
+        self::$instance = new GoogleTasksHelper($container->get('config')['google_tasks']);
     }
 
-    public static function getInstance(): GoolgeTasksHelper
+    public static function getInstance(): GoogleTasksHelper
     {
         return self::$instance;
+    }
+    /**
+     * Verify if Google Task is Active
+     */
+    public static function isActive(): bool
+    {
+        if(self::$instance === null){
+            return false;
+        }
+
+        return true;
     }
 }
