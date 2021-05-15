@@ -15,14 +15,14 @@ abstract class MiaTask
 
     abstract public function process($params);
 
-    public function run($params)
+    public function run($taskName, $params)
     {
         if(!GoogleTasksHelper::isActive()){
             $this->process($params);
             return;
         }
 
-        $params['mia_task_name'] = self::class;
+        $params['mia_task_name'] = $taskName;
 
         try {
             GoogleTasksHelper::getInstance()->addTask($this->queueId, $this->path, $params);

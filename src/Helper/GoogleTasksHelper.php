@@ -34,7 +34,11 @@ class GoogleTasksHelper
         //$this->queueId = $config['queue_id'];
         $this->secretKey = $config['secret_key'];
 
-        $this->client = new CloudTasksClient();
+        try {
+            $this->client = new CloudTasksClient();
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 
     public function addTask($queueId, $path, $params)
@@ -70,6 +74,12 @@ class GoogleTasksHelper
         }
 
         return false;
+    }
+
+    public static function executeTask($taskClassName, $params)
+    {
+        $task = new $taskClassName();
+        $task->run($taskClassName, $params);
     }
 
     public static function init(\Psr\Container\ContainerInterface $container)
