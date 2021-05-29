@@ -28,4 +28,13 @@ class StringHelper
 
         return ucfirst($split[0][0]) . '. ' . $split[1];
     }
+    /**
+     * Example:
+     * 
+     * Titulo del post -> titulo-del-post
+     */
+    public static function createSlug($text)
+    {
+        return preg_replace('/[^A-Za-z0-9-]+/', '-', $text);
+    }
 }
