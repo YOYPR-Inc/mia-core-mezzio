@@ -56,6 +56,7 @@ class GoogleTasksHelper
         // Add Secret Key
         $params['secret_key'] = $this->secretKey;
         // Setting a body value is only compatible with HTTP POST and PUT requests.
+        $httpRequest->setHeaders(['Content-Type' => 'application/json']);
         $httpRequest->setBody(json_encode($params));
 
         // Create a Cloud Task object.
