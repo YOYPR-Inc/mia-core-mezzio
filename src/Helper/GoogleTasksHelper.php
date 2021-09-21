@@ -45,12 +45,20 @@ class GoogleTasksHelper
         }
     }
 
-    public function addTask($queueId, $path, $params)
+    public function addTask($queueId, $path, $params, $service = null)
     {
         // Create an App Engine Http Request Object.
         $httpRequest = new AppEngineHttpRequest();
         // The path of the HTTP request to the App Engine service.
         $httpRequest->setRelativeUri($path);
+
+        if($service !== null){
+            $routing = new \Google\Cloud\Tasks\V2\AppEngineRouting();
+            $routing->setService($service);
+
+            $httpRequest->setAppEngineRouting($routing);
+        }
+
         // POST is the default HTTP method, but any HTTP method can be used.
         $httpRequest->setHttpMethod(HttpMethod::POST);
         // Add Secret Key
