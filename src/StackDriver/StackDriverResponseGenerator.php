@@ -1,6 +1,7 @@
 <?php namespace Mia\Core\StackDriver;
 
 use Mia\Core\Diactoros\MiaJsonErrorResponse;
+use Mia\Core\Exception\MiaException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Throwable;
@@ -18,7 +19,9 @@ class StackDriverResponseGenerator
         ResponseInterface $response
     ) : ResponseInterface {
         // Registrar exception en StackDriver
-        \Google\Cloud\ErrorReporting\Bootstrap::exceptionHandler($e);
+        if(!($e instanceof MiaException)){
+            \Google\Cloud\ErrorReporting\Bootstrap::exceptionHandler($e);
+        }
 
         $response = [
             'type'    => get_class($e),
