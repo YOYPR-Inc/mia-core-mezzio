@@ -6,6 +6,8 @@ use Google\Cloud\Tasks\V2\AppEngineHttpRequest;
 use Google\Cloud\Tasks\V2\CloudTasksClient;
 use Google\Cloud\Tasks\V2\HttpMethod;
 use Google\Cloud\Tasks\V2\Task;
+use Google\Cloud\Tasks\V2\HttpRequest;
+use Google\Protobuf\Timestamp;
 
 /**
  * Description of CsvHelper
@@ -43,6 +45,33 @@ class GoogleTasksHelper
         } catch (\Throwable $th) {
             //throw $th;
         }
+    }
+
+    public function addTaskHttp($queueId, $url, $params, \DateTime $scheduleTime = null)
+    {
+        // Create an App Engine Http Request Object.
+        $httpRequest = new HttpRequest();
+        $httpRequest->setUrl($url);
+        // POST is the default HTTP method, but any HTTP method can be used.
+        $httpRequest->setHttpMethod(HttpMethod::POST);
+        // Setting a body value is only compatible with HTTP POST and PUT requests.
+        $httpRequest->setHeaders(['Content-Type' => 'application/json']);
+        $httpRequest->setBody(json_encode($params));
+        // Create a Cloud Task object.
+        $task = new Task();
+        $task->setHttpRequest($httpRequest);
+
+        if($scheduleTime != null){
+            $timestamp = new Timestamp();
+            $timestamp->fromDateTime($scheduleTime);
+            $task->setScheduleTime($timestamp);
+        }
+
+        // Create Queue
+        $queueName = $this->client->queueName($this->projectId, $this->locationId, $queueId);
+
+        // Send request and print the task name.
+        return $this->client->createTask($queueName, $task);
     }
 
     public function addTask($queueId, $path, $params, $service = null)
