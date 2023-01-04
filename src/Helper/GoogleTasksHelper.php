@@ -74,7 +74,7 @@ class GoogleTasksHelper
         return $this->client->createTask($queueName, $task);
     }
 
-    public function addTask($queueId, $path, $params, $service = null)
+    public function addTask($queueId, $path, $params, $service = null, \DateTime $scheduleTime = null)
     {
         // Create an App Engine Http Request Object.
         $httpRequest = new AppEngineHttpRequest();
@@ -99,6 +99,12 @@ class GoogleTasksHelper
         // Create a Cloud Task object.
         $task = new Task();
         $task->setAppEngineHttpRequest($httpRequest);
+
+        if($scheduleTime != null){
+            $timestamp = new Timestamp();
+            $timestamp->fromDateTime($scheduleTime);
+            $task->setScheduleTime($timestamp);
+        }
 
         // Create Queue
         $queueName = $this->client->queueName($this->projectId, $this->locationId, $queueId);
