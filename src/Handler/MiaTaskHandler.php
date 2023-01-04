@@ -18,13 +18,17 @@ class MiaTaskHandler extends MiaRequestHandler
         if(!$service->isValidSecretKey($secretKey)) {
             return new MiaJsonErrorResponse(-1, 'The secret key is incorrect.');
         }
-        // Get task Name
-        $taskName = $this->getParam($request, 'mia_task_name', '');
-        // Create task
-        $task = GoogleTasksHelper::getInstance()->container->get($taskName);
-        // Execute task
-        $task->process($this->getAllParam($request));
-        // True response
-        return new \Mia\Core\Diactoros\MiaJsonResponse(true);
+        try {
+            // Get task Name
+            $taskName = $this->getParam($request, 'mia_task_name', '');
+            // Create task
+            $task = GoogleTasksHelper::getInstance()->container->get($taskName);
+            // Execute task
+            $task->process($this->getAllParam($request));
+            // True response
+            return new \Mia\Core\Diactoros\MiaJsonResponse(true);
+        } catch (\Throwable $th) {
+            return new MiaJsonErrorResponse(-1, $th->getMessage());
+        }
     }
 }
