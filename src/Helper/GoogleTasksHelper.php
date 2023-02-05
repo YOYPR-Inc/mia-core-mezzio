@@ -113,6 +113,16 @@ class GoogleTasksHelper
         return $this->client->createTask($queueName, $task);
     }
     /**
+     * Remove task
+     *
+     * @param string $taskId
+     */
+    public function removeTask($taskId)
+    {
+        return $this->client->deleteTask($taskId);
+    }
+
+    /**
      * Verify if secret key is valid
      */
     public function isValidSecretKey($key) : bool
