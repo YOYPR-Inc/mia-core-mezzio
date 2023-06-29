@@ -1,7 +1,7 @@
 {
     "name": "agencycoda/mia-core-mezzio",
     "description": "The library for Mezzio",
-    "version": "0.0.21",
+    "version": "0.0.22",
     "minimum-stability": "stable",
     "license": "MIT",
     "authors": [{
@@ -9,7 +9,7 @@
         "homepage": "https://agencycoda.com"
     }],
     "require": {
-        "php": "^7.3",
+        "php": ">=7.3",
         "psr/container": "^1.0",
         "psr/http-message": "^1.0.1",
         "psr/http-server-middleware": "^1.0",
