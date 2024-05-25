@@ -1,12 +1,12 @@
 {
-    "name": "agencycoda/mia-core-mezzio",
+    "name": "yoypr/mia-core-mezzio",
     "description": "The library for Mezzio",
     "version": "0.0.22",
     "minimum-stability": "stable",
     "license": "MIT",
     "authors": [{
-        "name": "Matias Camiletti",
-        "homepage": "https://agencycoda.com"
+        "name": "Alejandro Rodriguez",
+        "homepage": "https://yoypr.com"
     }],
     "require": {
         "php": ">=7.3",
